@@ -10,9 +10,9 @@ filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
 
 set autoindent             " Indent according to previous line.
-set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
+"set expandtab              " Use spaces instead of tabs.
+set softtabstop =8         " Tab key indents by 4 spaces.
+set shiftwidth  =8         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -116,6 +116,8 @@ Plugin 'https://github.com/easymotion/vim-easymotion'
 Plugin 'https://github.com/kien/ctrlp.vim'
 Plugin 'genutils'
 Plugin 'lookupfile'
+"Plugin 'youdao.dict'
+Plugin 'VincentCordobes/vim-translate'
 
 """"""""""""
 " Local configure
@@ -125,6 +127,8 @@ nnoremap <silent> <leader>fe :Sexplore!<cr>
 nnoremap <leader>ss :source ~/.vimrc<cr>
 nnoremap <silent> <leader>ee :e ~/.vimrc<cr>
 autocmd! bufwritepost .vimrc source ~/.vimrc
+
+nnoremap <leader>bf :buffers<CR>:buffer<Space>
 
 set number
 set wildmenu
@@ -148,7 +152,19 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 let g:ycm_collect_identifiers_from_tags_files=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
-nnoremap <leader>jd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>ydd :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>ycc :YcmCompleter ClearCompilationFlagCache<CR>
+nnoremap <leader>yfi :YcmCompleter FixIt<CR>
+nnoremap <leader>ygd :YcmCompleter GetDoc<CR>
+nnoremap <leader>ygI :YcmCompleter GetDocImprecise<CR>
+nnoremap <leader>ygp :YcmCompleter GetParent<CR>
+nnoremap <leader>ygt :YcmCompleter GetType<CR>
+nnoremap <leader>ygi :YcmCompleter GetTypeImprecise<CR>
+nnoremap <leader>ygT :YcmCompleter GoTo<CR>
+nnoremap <leader>ygd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>ygf :YcmCompleter GoToDefinitionx<CR>
+nnoremap <leader>ygp :YcmCompleter GoToImprecise<CR>
+nnoremap <leader>ygi :YcmCompleter GoToInclude<CR>
 
 ""
 " NERTree
@@ -216,7 +232,7 @@ let g:tagbar_type_cpp = {
 map  <Leader>ef <Plug>(easymotion-bd-f)
 nmap <Leader>ef <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
-nmap s <Plug>(easymotion-overwin-f2)
+nmap <leader>es <Plug>(easymotion-overwin-f2)
 " Move to line
 map <Leader>eL <Plug>(easymotion-bd-jk)
 nmap <Leader>eL <Plug>(easymotion-overwin-line)
@@ -234,3 +250,16 @@ nmap     <leader>cp <Plug>CtrlSFPwordPath
 nnoremap <leader>co :CtrlSFOpen<CR>
 nnoremap <leader>ct :CtrlSFToggle<CR>
 inoremap <leader>ct <Esc>:CtrlSFToggle<CR>
+
+""
+" Youdao
+"vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+"nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+"noremap <leader>yd :<C-u>Yde<CR>
+
+""
+" Translate-shell
+let g:translate#default_languages = {
+      \ 'zh': 'en',
+      \ 'en': 'zh'
+      \ }
