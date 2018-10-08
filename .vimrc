@@ -117,7 +117,8 @@ Plugin 'https://github.com/kien/ctrlp.vim'
 Plugin 'genutils'
 Plugin 'lookupfile'
 "Plugin 'youdao.dict'
-Plugin 'VincentCordobes/vim-translate'
+Plugin 'ianva/vim-youdao-translater'
+"Plugin 'VincentCordobes/vim-translate'
 
 """"""""""""
 " Local configure
@@ -150,7 +151,7 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 " ycmd
 " g:ycm_server_python_interpreter
 " 开启 YCM 标签补全引擎
-let g:ycm_server_python_interpreter = '/usr/bin/python2'
+"let g:ycm_server_python_interpreter = '/usr/bin/python2'
 let g:ycm_collect_identifiers_from_tags_files=0
 " 语法关键字补全
 let g:ycm_seed_identifiers_with_syntax=1
@@ -255,9 +256,9 @@ inoremap <leader>ct <Esc>:CtrlSFToggle<CR>
 
 ""
 " Youdao
-"vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-"nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-"noremap <leader>yd :<C-u>Yde<CR>
+vnoremap <silent> <C-T> :<C-u>Ydv<CR>
+nnoremap <silent> <C-T> :<C-u>Ydc<CR>
+noremap <leader>yd :<C-u>Yde<CR>
 
 ""
 " Translate-shell
