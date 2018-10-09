@@ -94,8 +94,6 @@ Plugin 'VundleVim/Vundle.vim'
 " Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
@@ -116,9 +114,10 @@ Plugin 'https://github.com/easymotion/vim-easymotion'
 Plugin 'https://github.com/kien/ctrlp.vim'
 Plugin 'genutils'
 Plugin 'lookupfile'
-"Plugin 'youdao.dict'
 Plugin 'ianva/vim-youdao-translater'
-"Plugin 'VincentCordobes/vim-translate'
+
+call vundle#end()            " required
+filetype plugin indent on    " required
 
 """"""""""""
 " Local configure
