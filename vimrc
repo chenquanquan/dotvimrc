@@ -72,8 +72,6 @@ call plug#begin('~/.vim/plugged')
 
 " Make sure you use single quotes
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
-Plug 'fatih/vim-go', { 'tag': '*' }
-" Plugin options
 
 
 Plug 'tpope/vim-fugitive'
@@ -83,12 +81,19 @@ Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/vim-scripts/a.vim'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/kien/ctrlp.vim'
-Plug 'genutils'
-Plug 'lookupfile'
+"Plug 'genutils'
+"Plug 'lookupfile'
 Plug 'ianva/vim-youdao-translater'
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+
+"" recommand from vim-go
+Plug 'garyburd/go-explorer'
+Plug 'joereynolds/vim-minisnip'
+Plug 'Shougo/neocomplete.vim'
+
+call plug#end()
 
 """"""""""""
 " Local configure
