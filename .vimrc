@@ -123,6 +123,11 @@ Plugin 'ianva/vim-youdao-translater'
 """"""""""""
 " Local configure
 "
+set number
+set wildmenu
+
+""
+" Local keymap
 let mapleader=";"
 nnoremap <silent> <leader>fe :Sexplore!<cr>
 nnoremap <leader>ss :source ~/.vimrc<cr>
@@ -131,8 +136,11 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 nnoremap <leader>bf :buffers<CR>:buffer<Space>
 
-set number
-set wildmenu
+""
+" Local stype
+highlight OverLength ctermbg=darkyellow ctermfg=white
+match OverLength /\%81v.\+/
+
 
 ""
 " ctags & cscope

@@ -8,3 +8,7 @@ mkdir -p ~/.vim/files/info
 mkdir -p ~/.vim/bundle/
 
 cd ~/.vim/bundle; git clone https://github.com/VundleVim/Vundle.vim.git
+
+# For ubuntu
+sudo apt install vim-youcompleteme
+vim-addon-manager install youcompleteme
