@@ -199,7 +199,7 @@ nnoremap <leader>ygt :YcmCompleter GetType<CR>
 nnoremap <leader>ygi :YcmCompleter GetTypeImprecise<CR>
 nnoremap <leader>ygT :YcmCompleter GoTo<CR>
 nnoremap <leader>ygd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>ygf :YcmCompleter GoToDefinitionx<CR>
+nnoremap <leader>ygf :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>ygp :YcmCompleter GoToImprecise<CR>
 nnoremap <leader>ygi :YcmCompleter GoToInclude<CR>
 
