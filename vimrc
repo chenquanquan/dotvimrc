@@ -10,9 +10,9 @@ filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
 
 set autoindent             " Indent according to previous line.
-"set expandtab              " Use spaces instead of tabs.
-set softtabstop =8         " Tab key indents by 4 spaces.
-set shiftwidth  =8         " >> indents by 4 spaces.
+set expandtab              " Use spaces instead of tabs.
+set softtabstop =4         " Tab key indents by 4 spaces.
+set shiftwidth  =4         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -81,14 +81,21 @@ Plug 'https://github.com/majutsushi/tagbar'
 Plug 'https://github.com/vim-scripts/a.vim'
 Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/kien/ctrlp.vim'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 "Plug 'genutils'
 "Plug 'lookupfile'
 Plug 'ianva/vim-youdao-translater'
+Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
 
+"" For markdown
+Plug 'iamcco/mathjax-support-for-mkdp'
+Plug 'iamcco/markdown-preview.vim'
+
 "" recommand from vim-go
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'garyburd/go-explorer'
 Plug 'joereynolds/vim-minisnip'
 Plug 'Shougo/neocomplete.vim'
@@ -101,8 +108,8 @@ call plug#end()
 set number
 set wildmenu
 
-""
-" Local keymap
+""""
+"" Local keymap
 let mapleader=";"
 nnoremap <silent> <leader>fe :Sexplore!<cr>
 nnoremap <leader>ss :source ~/.vimrc<cr>
@@ -111,11 +118,55 @@ autocmd! bufwritepost .vimrc source ~/.vimrc
 
 nnoremap <leader>bf :buffers<CR>:buffer<Space>
 
-""
-" Local stype
+nnoremap <C-n> :cnext<CR>
+nnoremap <C-m> :cprevious<CR>
+nnoremap <leader>a :cclose<CR>
+""""
+"" Local stype
 highlight OverLength ctermbg=darkyellow ctermfg=white
 match OverLength /\%81v.\+/
 
+""""
+"" Programe language settings
+""
+" C/C++
+autocmd BufNewFile,BufRead *.c setlocal noexpandtab tabstop=8 shiftwidth=8
+
+""
+" Go
+" run :GoBuild or :GoTestCompile based on the go file
+let g:go_highlight_types = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_build_constraints = 1 
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+let g:go_metalinter_autosave = 1
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_deadline = "5s"
+let g:go_auto_type_info = 1
+set updatetime=100
+let g:go_auto_sameids = 1
+
+function! s:build_go_files()
+  let l:file = expand('%')
+  if l:file =~# '^\f\+_test\.go$'
+    call go#test#Test(0, 1)
+  elseif l:file =~# '^\f\+\.go$'
+    call go#cmd#Build(0)
+  endif
+endfunction
+
+autocmd FileType go nmap <leader>bb :<C-u>call <SID>build_go_files()<CR>
+autocmd FileType go nmap <leader>rr  <Plug>(go-run)
+autocmd FileType go nmap <Leader>cc <Plug>(go-coverage-toggle)
+autocmd FileType go nmap <Leader>ii <Plug>(go-info)
+autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
+au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
+
+""""
+"" Plugin settings
 
 ""
 " ctags & cscope
@@ -239,9 +290,9 @@ inoremap <leader>ct <Esc>:CtrlSFToggle<CR>
 
 ""
 " Youdao
-vnoremap <silent> <C-T> :<C-u>Ydv<CR>
-nnoremap <silent> <C-T> :<C-u>Ydc<CR>
-noremap <leader>yd :<C-u>Yde<CR>
+noremap <leader>yde :<C-u>Yde<CR>
+noremap <leader>ydv :<C-u>Ydv<CR>
+noremap <leader>ydc :<C-u>Ydc<CR>
 
 ""
 " Translate-shell
@@ -249,3 +300,34 @@ let g:translate#default_languages = {
       \ 'zh': 'en',
       \ 'en': 'zh'
       \ }
+
+""
+" markdown preview
+let g:mkdp_path_to_chrome = ""
+" path to the chrome or the command to open chrome(or other modern browsers)
+" if set, g:mkdp_browserfunc would be ignored
+let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
+" callback vim function to open browser, the only param is the url to open
+let g:mkdp_auto_start = 0
+" set to 1, the vim will open the preview window once enter the markdown
+" buffer
+let g:mkdp_auto_open = 0
+" set to 1, the vim will auto open preview window when you edit the
+" markdown file
+let g:mkdp_auto_close = 1
+" set to 1, the vim will auto close current preview window when change
+" from markdown buffer to another buffer
+let g:mkdp_refresh_slow = 0
+" set to 1, the vim will just refresh markdown when save the buffer or
+" leave from insert mode, default 0 is auto refresh markdown as you edit or
+" move the cursor
+let g:mkdp_command_for_global = 0
+" set to 1, the MarkdownPreview command can be use for all files,
+" by default it just can be use in markdown file
+let g:mkdp_open_to_the_world = 0
+" set to 1, preview server available to others in your network
+" by default, the server only listens on localhost (127.0.0.1)
+nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
+imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
+nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
+imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
