@@ -33,7 +33,8 @@ set splitbelow             " Open new windows below the current window.
 set splitright             " Open new windows right of the current window.
 
 set cursorline             " Find the current line quickly.
-set wrapscan               " Searches wrap around end-of-file.
+"set wrapscan               " Searches wrap around end-of-file.
+set nowrapscan               " searches no wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
 
@@ -89,6 +90,7 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'chr4/nginx.vim'
 
 "" For markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
