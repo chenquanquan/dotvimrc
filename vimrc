@@ -130,7 +130,7 @@ nnoremap <leader>a :cclose<CR>
 """"
 "" Local stype
 highlight OverLength ctermbg=darkyellow ctermfg=white
-match OverLength /\%81v.\+/
+autocmd FileType c match OverLength /\%81v.\+/
 
 """"
 "" Programe language settings
