@@ -74,7 +74,6 @@ call plug#begin('~/.vim/plugged')
 " Make sure you use single quotes
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 
-
 Plug 'tpope/vim-fugitive'
 Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/dyng/ctrlsf.vim'
@@ -98,9 +97,14 @@ Plug 'iamcco/markdown-preview.vim'
 
 "" recommand from vim-go
 Plug 'AndrewRadev/splitjoin.vim'
-Plug 'garyburd/go-explorer'
+"" Plug 'garyburd/go-explorer'
 Plug 'joereynolds/vim-minisnip'
 Plug 'Shougo/neocomplete.vim'
+
+"" New plugin
+Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-gitgutter'
+Plug 'kshenoy/vim-signature'
 
 call plug#end()
 
@@ -223,7 +227,7 @@ let NERDTreeAutoDeleteBuffer=1
 ""
 " tagbar
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边
-let tagbar_left=1
+let tagbar_left=0
 " 设置显示／隐藏标签列表子窗口的快捷键。速记：tag list
 nnoremap <Leader>tl :TagbarToggle<CR>
 " 设置标签子窗口的宽度
@@ -297,20 +301,13 @@ noremap <leader>ydv :<C-u>Ydv<CR>
 noremap <leader>ydc :<C-u>Ydc<CR>
 
 ""
-" Translate-shell
-let g:translate#default_languages = {
-      \ 'zh': 'en',
-      \ 'en': 'zh'
-      \ }
-
-""
 " markdown preview
 let g:mkdp_path_to_chrome = ""
 " path to the chrome or the command to open chrome(or other modern browsers)
 " if set, g:mkdp_browserfunc would be ignored
 let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
 " callback vim function to open browser, the only param is the url to open
-let g:mkdp_auto_start = 0
+"let g:mkdp_auto_start = 0
 " set to 1, the vim will open the preview window once enter the markdown
 " buffer
 let g:mkdp_auto_open = 0
@@ -329,7 +326,48 @@ let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
 " set to 1, preview server available to others in your network
 " by default, the server only listens on localhost (127.0.0.1)
+let g:mkdp_auto_start = 1
+let g:mkdp_delay_start_browser = 800
+let g:mkdp_delay_auto_refresh = 3000
 nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
 imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+
+""
+" cscope
+noremap <leader>ts :set tags=tags<cr> :cs add cscope.out<cr>
+
+"find 的选项
+"
+"0或则S：查找本符号
+"
+"1或则G：查找本定义
+"
+"2或则D：查找本函数调用的函数
+"
+"3或则C：查找调用本函数的函数
+"
+"4或则T：查找本字符串
+"
+"6或则E：查找本EGREP模式
+"
+"7或则F：查找本文件
+"
+"8或则I：查找包含本文件的文件
+"
+nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
+
+""
+" vim-gitgutter
+nmap ]c <Plug>GitGutterNextHunk
+nmap [c <Plug>GitGutterPrevHunk
+nmap <Leader>hs <Plug>GitGutterStageHunk
+nmap <Leader>hu <Plug>GitGutterUndoHunk
