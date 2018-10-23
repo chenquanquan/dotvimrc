@@ -69,7 +69,7 @@ set viminfo ='100,n$HOME/.vim/files/info/viminfo
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
-call plug#begin('~/.vim/plugged')
+call plug#begin('$HOME/.vim/plugged')
 
 " Make sure you use single quotes
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
@@ -88,7 +88,7 @@ Plug 'ianva/vim-youdao-translater'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
+Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '$HOME/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'chr4/nginx.vim'
 
 "" For markdown
@@ -113,14 +113,18 @@ call plug#end()
 "
 set number
 set wildmenu
+hi CursorLine   cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+hi CursorColumn cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+nnoremap <Leader>cc :set cursorline! cursorcolumn!<CR>
+nnoremap <silent> <Leader>ll ml:execute 'match Search /\%'.line('.').'l/'<CR>
 
 """"
 "" Local keymap
 let mapleader=";"
 nnoremap <silent> <leader>fe :Sexplore!<cr>
-nnoremap <leader>ss :source ~/.vimrc<cr>
-nnoremap <silent> <leader>ee :e ~/.vimrc<cr>
-autocmd! bufwritepost .vimrc source ~/.vimrc
+nnoremap <leader>ss :source $HOME/.vimrc<cr>
+nnoremap <silent> <leader>ee :e $HOME/.vimrc<cr>
+autocmd! bufwritepost .vimrc source $HOME/.vimrc
 
 nnoremap <leader>bf :buffers<CR>:buffer<Space>
 
@@ -130,7 +134,7 @@ nnoremap <leader>a :cclose<CR>
 """"
 "" Local stype
 highlight OverLength ctermbg=darkyellow ctermfg=white
-autocmd FileType c match OverLength /\%81v.\+/
+match OverLength /\%81v.\+/
 
 """"
 "" Programe language settings
@@ -367,7 +371,7 @@ nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 ""
 " vim-gitgutter
-nmap ]c <Plug>GitGutterNextHunk
-nmap [c <Plug>GitGutterPrevHunk
-nmap <Leader>hs <Plug>GitGutterStageHunk
-nmap <Leader>hu <Plug>GitGutterUndoHunk
+nnoremap ]c <Plug>GitGutterNextHunk
+nnoremap [c <Plug>GitGutterPrevHunk
+nnoremap <Leader>hs <Plug>GitGutterStageHunk
+nnoremap <Leader>hu <Plug>GitGutterUndoHunk
