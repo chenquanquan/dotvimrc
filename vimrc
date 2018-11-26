@@ -134,13 +134,13 @@ nnoremap <leader>a :cclose<CR>
 """"
 "" Local stype
 highlight OverLength ctermbg=darkyellow ctermfg=white
-match OverLength /\%81v.\+/
+"match OverLength /\%81v.\+/
 
 """"
 "" Programe language settings
 ""
 " C/C++
-autocmd BufNewFile,BufRead *.c setlocal noexpandtab tabstop=8 shiftwidth=8
+"autocmd BufNewFile,BufRead *.c setlocal noexpandtab tabstop=8 shiftwidth=8
 
 ""
 " Go
