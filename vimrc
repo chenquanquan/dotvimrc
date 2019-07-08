@@ -10,9 +10,9 @@ filetype plugin indent on  " Load plugins according to detected filetype.
 syntax on                  " Enable syntax highlighting.
 
 set autoindent             " Indent according to previous line.
-set expandtab              " Use spaces instead of tabs.
-set softtabstop =4         " Tab key indents by 4 spaces.
-set shiftwidth  =4         " >> indents by 4 spaces.
+"set expandtab              " Use spaces instead of tabs.
+set softtabstop =8         " Tab key indents by 4 spaces.
+set shiftwidth  =8         " >> indents by 4 spaces.
 set shiftround             " >> indents to next multiple of 'shiftwidth'.
 
 set backspace   =indent,eol,start  " Make backspace work as you would expect.
@@ -87,24 +87,29 @@ Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
 Plug 'ianva/vim-youdao-translater'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '$HOME/.vim/plugged/gocode/vim/symlink.sh' }
 Plug 'chr4/nginx.vim'
 
 "" For markdown
 Plug 'iamcco/mathjax-support-for-mkdp'
 Plug 'iamcco/markdown-preview.vim'
 
-"" recommand from vim-go
-Plug 'AndrewRadev/splitjoin.vim'
-"" Plug 'garyburd/go-explorer'
-Plug 'joereynolds/vim-minisnip'
-Plug 'Shougo/neocomplete.vim'
+"""""" recommand from vim-go
+""""Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+""""Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '$HOME/.vim/plugged/gocode/vim/symlink.sh' }
+""""Plug 'AndrewRadev/splitjoin.vim'
+"""""" Plug 'garyburd/go-explorer'
+""""Plug 'joereynolds/vim-minisnip'
+""""Plug 'Shougo/neocomplete.vim'
+
+"" For c
+Plug 'WolfgangMehner/c-support'
 
 "" New plugin
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
+
+Plug 'liuchengxu/vim-which-key'
 
 call plug#end()
 
@@ -180,7 +185,8 @@ au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 
 ""
 " ctags & cscope
-map <leader>ts :set tags+=./tags<cr> :cs add ./cscope.out<cr>
+map <leader>ts :set tags+=./tags<cr>
+map <leader>cs :cs add ./cscope.out<cr>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -330,7 +336,7 @@ let g:mkdp_command_for_global = 0
 let g:mkdp_open_to_the_world = 0
 " set to 1, preview server available to others in your network
 " by default, the server only listens on localhost (127.0.0.1)
-let g:mkdp_auto_start = 1
+let g:mkdp_auto_start = 0
 let g:mkdp_delay_start_browser = 800
 let g:mkdp_delay_auto_refresh = 3000
 nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
@@ -375,3 +381,7 @@ nnoremap ]c <Plug>GitGutterNextHunk
 nnoremap [c <Plug>GitGutterPrevHunk
 nnoremap <Leader>hs <Plug>GitGutterStageHunk
 nnoremap <Leader>hu <Plug>GitGutterUndoHunk
+
+""
+" vim-which-key
+nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
