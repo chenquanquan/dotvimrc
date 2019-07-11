@@ -187,8 +187,7 @@ au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 " ctags & cscope
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
-map <leader>ts :set tags+=./tags<cr>
-map <leader>cs :cs add ./cscope.out<cr>
+noremap <leader>ts :set tags=tags<cr> :cs add cscope.out<cr>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
@@ -345,37 +344,6 @@ nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
 imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
 imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
-
-""
-" cscope
-noremap <leader>ts :set tags=tags<cr> :cs add cscope.out<cr>
-
-"find 的选项
-"
-"0或则S：查找本符号
-"
-"1或则G：查找本定义
-"
-"2或则D：查找本函数调用的函数
-"
-"3或则C：查找调用本函数的函数
-"
-"4或则T：查找本字符串
-"
-"6或则E：查找本EGREP模式
-"
-"7或则F：查找本文件
-"
-"8或则I：查找包含本文件的文件
-"
-nnoremap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
-nnoremap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 ""
 " vim-gitgutter
