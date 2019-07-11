@@ -185,6 +185,8 @@ au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 
 ""
 " ctags & cscope
+set cscopequickfix=s-,c-,d-,i-,t-,e-
+
 map <leader>ts :set tags+=./tags<cr>
 map <leader>cs :cs add ./cscope.out<cr>
 
