@@ -185,9 +185,11 @@ au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
 
 ""
 " ctags & cscope
+" :cw/copen  - list all result
 set cscopequickfix=s-,c-,d-,i-,t-,e-
 
-noremap <leader>ts :set tags=tags<cr> :cs add cscope.out<cr>
+noremap <leader>ts :set tags=tags<cr>
+noremap <leader>cs :cs add cscope.out<cr>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
