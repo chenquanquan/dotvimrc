@@ -103,6 +103,7 @@ Plug 'iamcco/markdown-preview.vim'
 
 "" For c
 Plug 'WolfgangMehner/c-support'
+Plug 'w0rp/ale' "Check syntax in Vim asynchronously and fix files
 
 "" New plugin
 Plug 'itchyny/lightline.vim'
@@ -357,3 +358,17 @@ nnoremap <Leader>hu <Plug>GitGutterUndoHunk
 ""
 " vim-which-key
 nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
+
+""
+" ale
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = 'w'
+let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
+let g:ale_echo_msg_format = '[%linter%] %code: %%s'
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
+let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
+let g:ale_c_cppcheck_options = ''
+let g:ale_cpp_cppcheck_options = ''
