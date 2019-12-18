@@ -208,8 +208,9 @@ noremap <leader>lt :set tags=tags<cr>
 noremap <leader>lc :cs add cscope.out<cr>
 
 
-""""""""
+"""""""""""""""""""""""""""""""""""""""
 "" File
+"""""""""""""""""""""""""""""""""""""""
 let g:which_key_map.f = { 'name' : '+file' }
 nnoremap <Leader>fj :<Esc>
 nnoremap <silent> <leader>fe :Sexplore!<cr>
