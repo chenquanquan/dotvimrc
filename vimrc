@@ -63,9 +63,9 @@ set undofile
 set undodir     =$HOME/.vim/files/undo/
 set viminfo ='100,n$HOME/.vim/files/info/viminfo
 
-""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-plug
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
 " - Avoid using standard Vim directory names like 'plugin'
@@ -74,155 +74,145 @@ call plug#begin('$HOME/.vim/plugged')
 " Make sure you use single quotes
 " Using a tagged release; wildcard allowed (requires git 1.9.2 or above)
 
-Plug 'tpope/vim-fugitive'
-Plug 'https://github.com/scrooloose/nerdtree'
 Plug 'https://github.com/dyng/ctrlsf.vim'
-Plug 'https://github.com/majutsushi/tagbar'
-Plug 'https://github.com/vim-scripts/a.vim'
-Plug 'https://github.com/easymotion/vim-easymotion'
 Plug 'https://github.com/kien/ctrlp.vim'
-Plug 'Yggdroot/LeaderF', { 'do': './install.sh' }
-"Plug 'genutils'
-"Plug 'lookupfile'
-Plug 'ianva/vim-youdao-translater'
+Plug 'https://github.com/vim-scripts/a.vim'
 Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 
-Plug 'chr4/nginx.vim'
-
-"" For markdown
-Plug 'iamcco/mathjax-support-for-mkdp'
-Plug 'iamcco/markdown-preview.vim'
-
-"""""" recommand from vim-go
-""""Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-""""Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '$HOME/.vim/plugged/gocode/vim/symlink.sh' }
-""""Plug 'AndrewRadev/splitjoin.vim'
-"""""" Plug 'garyburd/go-explorer'
-""""Plug 'joereynolds/vim-minisnip'
-""""Plug 'Shougo/neocomplete.vim'
-
 "" For c
-Plug 'WolfgangMehner/c-support'
-Plug 'w0rp/ale' "Check syntax in Vim asynchronously and fix files
+""Plug 'WolfgangMehner/c-support'
+""Plug 'w0rp/ale' "Check syntax in Vim asynchronously and fix files
 
 "" New plugin
-Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
 
-Plug 'liuchengxu/vim-which-key'
+Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } " File & buffer search
+Plug 'https://github.com/easymotion/vim-easymotion' " Jump in window
+Plug 'itchyny/lightline.vim' " Status line
+Plug 'liuchengxu/vim-which-key' " Keymap prompts
+Plug 'jlanzarotta/bufexplorer' " Buffer
+Plug 'https://github.com/scrooloose/nerdtree' " File explorer
+Plug 'https://github.com/majutsushi/tagbar' " Tag
+Plug 'tpope/vim-fugitive' " Git tools
+""""Plug 'frazrepo/vim-rainbow' " gives every pair of brackets a unique color
+Plug 'mileszs/ack.vim' " File search
 
 call plug#end()
 
-""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Local configure
-"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
 set wildmenu
 hi CursorLine   cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
-nnoremap <Leader>cc :set cursorline! cursorcolumn!<CR>
-nnoremap <silent> <Leader>ll ml:execute 'match Search /\%'.line('.').'l/'<CR>
+
+autocmd! bufwritepost .vimrc source $HOME/.vimrc
 
 """"
 "" Local keymap
 let mapleader=";"
-nnoremap <silent> <leader>fe :Sexplore!<cr>
-nnoremap <leader>ss :source $HOME/.vimrc<cr>
-nnoremap <silent> <leader>ee :e $HOME/.vimrc<cr>
-autocmd! bufwritepost .vimrc source $HOME/.vimrc
 
-nnoremap <leader>bf :buffers<CR>:buffer<Space>
+""""
+"" Local stype
+highlight OverLength ctermbg=darkyellow ctermfg=white
+match OverLength /\%81v.\+/
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Programe language settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" C/C++
+"autocmd BufNewFile,BufRead *.c setlocal noexpandtab tabstop=8 shiftwidth=8
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Plugin & keymap settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""
+" vim-rainbow
+let g:rainbow_active = 1
+
+""
+" vim-which-key - Start
+let g:which_key_map =  {}
+call which_key#register(mapleader, "g:which_key_map")
+set timeoutlen=500
+nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
+vnoremap <silent> <leader> :WhichKeyVisual '<leader>'<CR>
+
+"""""""""""""""""""""""""""""""""""""""
+"" Uncategorized
+"""""""""""""""""""""""""""""""""""""""
+imap jj <Esc>
+nnoremap <Leader>jj :<Esc>
+
+nnoremap <Leader>w :w<cr>
+nnoremap <Leader>wa :wa<cr>
+nnoremap <Leader>q :q<cr>
+
+nnoremap <Leader>cc :set cursorline! cursorcolumn!<CR>
+nnoremap <silent> <Leader>ll ml:execute 'match Search /\%'.line('.').'l/'<CR>
 
 nnoremap <C-n> :cnext<CR>
 nnoremap <C-m> :cprevious<CR>
 nnoremap <leader>a :cclose<CR>
-""""
-"" Local stype
-highlight OverLength ctermbg=darkyellow ctermfg=white
-"match OverLength /\%81v.\+/
-
-""""
-"" Programe language settings
-""
-" C/C++
-"autocmd BufNewFile,BufRead *.c setlocal noexpandtab tabstop=8 shiftwidth=8
 
 ""
-" Go
-" run :GoBuild or :GoTestCompile based on the go file
-let g:go_highlight_types = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_build_constraints = 1 
-let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
-let g:go_metalinter_autosave = 1
-let g:go_metalinter_autosave_enabled = ['vet', 'golint']
-let g:go_metalinter_deadline = "5s"
-let g:go_auto_type_info = 1
-set updatetime=100
-let g:go_auto_sameids = 1
+" vim-gitgutter
+nnoremap ]c <Plug>GitGutterNextHunk
+nnoremap [c <Plug>GitGutterPrevHunk
+nnoremap <Leader>hs <Plug>GitGutterStageHunk
+nnoremap <Leader>hu <Plug>GitGutterUndoHunk
 
-function! s:build_go_files()
-  let l:file = expand('%')
-  if l:file =~# '^\f\+_test\.go$'
-    call go#test#Test(0, 1)
-  elseif l:file =~# '^\f\+\.go$'
-    call go#cmd#Build(0)
-  endif
-endfunction
 
-autocmd FileType go nmap <leader>bb :<C-u>call <SID>build_go_files()<CR>
-autocmd FileType go nmap <leader>rr  <Plug>(go-run)
-autocmd FileType go nmap <Leader>cc <Plug>(go-coverage-toggle)
-autocmd FileType go nmap <Leader>ii <Plug>(go-info)
-autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4 
-au BufRead,BufNewFile *.gohtml set filetype=gohtmltmpl
+"""""""""""""""""""""""""""""""""""""""
+"" Buffer
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.b = { 'name' : '+Buffer' }
+nnoremap <Leader>bj :<Esc>
+nnoremap <leader>bb :buffers<CR>:buffer<Space>
+""
+" LeaderF
+nnoremap <silent> <leader>bl :LeaderfBuffer<cr>
+""
+" bufexplorer
+nnoremap <leader>be :BufExplorer<CR>
+nnoremap <leader>bt :ToggleBufExplorer<CR>
+nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
+nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
 
-""""
-"" Plugin settings
+
+"""""""""""""""""""""""""""""""""""""""
+"" Edit
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.e = { 'name' : '+Edit' }
+nnoremap <Leader>ej :<Esc>
+nnoremap <silent> <leader>ep :e $HOME/.vimrc<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""
+"" Load
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.l = { 'name' : '+load' }
+nnoremap <Leader>lj :<Esc>
+nnoremap <leader>lp :source $HOME/.vimrc<cr>
 
 ""
 " ctags & cscope
 " :cw/copen  - list all result
 set cscopequickfix=s-,c-,d-,i-,t-,e-
+noremap <leader>lt :set tags=tags<cr>
+noremap <leader>lc :cs add cscope.out<cr>
 
-noremap <leader>ts :set tags=tags<cr>
-noremap <leader>cs :cs add cscope.out<cr>
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
-
+""""""""
+"" File
+let g:which_key_map.f = { 'name' : '+file' }
+nnoremap <Leader>fj :<Esc>
+nnoremap <silent> <leader>fe :Sexplore!<cr>
 ""
-" ycmd
-" g:ycm_server_python_interpreter
-" 开启 YCM 标签补全引擎
-"let g:ycm_server_python_interpreter = '/usr/bin/python2'
-let g:ycm_collect_identifiers_from_tags_files=0
-" 语法关键字补全
-let g:ycm_seed_identifiers_with_syntax=1
-nnoremap <leader>ydd :YcmCompleter GoToDefinitionElseDeclaration<CR>
-nnoremap <leader>ycc :YcmCompleter ClearCompilationFlagCache<CR>
-nnoremap <leader>yfi :YcmCompleter FixIt<CR>
-nnoremap <leader>ygd :YcmCompleter GetDoc<CR>
-nnoremap <leader>ygI :YcmCompleter GetDocImprecise<CR>
-nnoremap <leader>ygp :YcmCompleter GetParent<CR>
-nnoremap <leader>ygt :YcmCompleter GetType<CR>
-nnoremap <leader>ygi :YcmCompleter GetTypeImprecise<CR>
-nnoremap <leader>ygT :YcmCompleter GoTo<CR>
-nnoremap <leader>ygd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>ygf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>ygp :YcmCompleter GoToImprecise<CR>
-nnoremap <leader>ygi :YcmCompleter GoToInclude<CR>
-
+" LeaderF
+nnoremap <leader>ff :LeaderfFile<cr>
 ""
 " NERTree
 " 使用 NERDTree 插件查看工程文件。设置快捷键，速记：file list
@@ -238,6 +228,12 @@ let NERDTreeMinimalUI=1
 " 删除文件时自动删除文件对应 buffer
 let NERDTreeAutoDeleteBuffer=1
 
+
+"""""""""""""""""""""""""""""""""""""""
+"" Tag
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.t = { 'name' : '+tag' }
+nnoremap <Leader>tj :<Esc>
 ""
 " tagbar
 " 设置 tagbar 子窗口的位置出现在主编辑区的左边
@@ -283,92 +279,66 @@ let g:tagbar_type_cpp = {
      \ }
 \ }
 
+
+"""""""""""""""""""""""""""""""""""""""
+"" Jump
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.j = { 'name' : '+jump' }
+nnoremap <Leader>jj :<Esc>
 ""
 " vim-easymotion
 " <Leader>f{char} to move to {char}
-map  <Leader>ef <Plug>(easymotion-bd-f)
-nmap <Leader>ef <Plug>(easymotion-overwin-f)
+map  <Leader>jf <Plug>(easymotion-bd-f)
+nmap <Leader>jf <Plug>(easymotion-overwin-f)
 " s{char}{char} to move to {char}{char}
-nmap <leader>es <Plug>(easymotion-overwin-f2)
+nmap <leader>js <Plug>(easymotion-overwin-f2)
 " Move to line
-map <Leader>eL <Plug>(easymotion-bd-jk)
+map <Leader>jL <Plug>(easymotion-bd-jk)
 nmap <Leader>eL <Plug>(easymotion-overwin-line)
 " Move to word
-map  <Leader>ew <Plug>(easymotion-bd-w)
-nmap <Leader>ew <Plug>(easymotion-overwin-w)
+map  <Leader>jw <Plug>(easymotion-bd-w)
+nmap <Leader>jw <Plug>(easymotion-overwin-w)
 
+
+"""""""""""""""""""""""""""""""""""""""
+"" Search
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.s = { 'name' : '+search' }
+nnoremap <Leader>sj :<Esc>
+
+nnoremap <Leader>sa :Ack 
 ""
 " ctrlsf
-nmap     <leader>cf <Plug>CtrlSFPrompt
-vmap     <leader>cf <Plug>CtrlSFVwordPath
-vmap     <leader>cF <Plug>CtrlSFVwordExec
-nmap     <leader>cn <Plug>CtrlSFCwordPath
-nmap     <leader>cp <Plug>CtrlSFPwordPath
-nnoremap <leader>co :CtrlSFOpen<CR>
-nnoremap <leader>ct :CtrlSFToggle<CR>
-inoremap <leader>ct <Esc>:CtrlSFToggle<CR>
+nmap     <leader>sf <Plug>CtrlSFPrompt
+vmap     <leader>sf <Plug>CtrlSFVwordPath
+vmap     <leader>sF <Plug>CtrlSFVwordExec
+nmap     <leader>sn <Plug>CtrlSFCwordPath
+nmap     <leader>sp <Plug>CtrlSFPwordPath
+nnoremap <leader>so :CtrlSFOpen<CR>
+nnoremap <leader>st :CtrlSFToggle<CR>
+inoremap <leader>st <Esc>:CtrlSFToggle<CR>
 
-""
-" Youdao
-noremap <leader>yde :<C-u>Yde<CR>
-noremap <leader>ydv :<C-u>Ydv<CR>
-noremap <leader>ydc :<C-u>Ydc<CR>
 
-""
-" markdown preview
-let g:mkdp_path_to_chrome = ""
-" path to the chrome or the command to open chrome(or other modern browsers)
-" if set, g:mkdp_browserfunc would be ignored
-let g:mkdp_browserfunc = 'MKDP_browserfunc_default'
-" callback vim function to open browser, the only param is the url to open
-"let g:mkdp_auto_start = 0
-" set to 1, the vim will open the preview window once enter the markdown
-" buffer
-let g:mkdp_auto_open = 0
-" set to 1, the vim will auto open preview window when you edit the
-" markdown file
-let g:mkdp_auto_close = 1
-" set to 1, the vim will auto close current preview window when change
-" from markdown buffer to another buffer
-let g:mkdp_refresh_slow = 0
-" set to 1, the vim will just refresh markdown when save the buffer or
-" leave from insert mode, default 0 is auto refresh markdown as you edit or
-" move the cursor
-let g:mkdp_command_for_global = 0
-" set to 1, the MarkdownPreview command can be use for all files,
-" by default it just can be use in markdown file
-let g:mkdp_open_to_the_world = 0
-" set to 1, preview server available to others in your network
-" by default, the server only listens on localhost (127.0.0.1)
-let g:mkdp_auto_start = 0
-let g:mkdp_delay_start_browser = 800
-let g:mkdp_delay_auto_refresh = 3000
-nmap <silent> <F8> <Plug>MarkdownPreview        " for normal mode
-imap <silent> <F8> <Plug>MarkdownPreview        " for insert mode
-nmap <silent> <F9> <Plug>StopMarkdownPreview    " for normal mode
-imap <silent> <F9> <Plug>StopMarkdownPreview    " for insert mode
+"""""""""""""""""""""""""""""""""""""""
+"" cscope
+"""""""""""""""""""""""""""""""""""""""
+let g:which_key_map.c = { 'name' : '+cscope' }
+nnoremap <Leader>cj :<Esc>
+" cscope
+nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>f :cs find f <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>i :cs find i <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-""
-" vim-gitgutter
-nnoremap ]c <Plug>GitGutterNextHunk
-nnoremap [c <Plug>GitGutterPrevHunk
-nnoremap <Leader>hs <Plug>GitGutterStageHunk
-nnoremap <Leader>hu <Plug>GitGutterUndoHunk
-
-""
-" vim-which-key
-nnoremap <silent> <leader> :WhichKey '<leader>'<CR>
-
-""
-" ale
-let g:ale_sign_column_always = 1
-let g:ale_sign_error = '✗'
-let g:ale_sign_warning = 'w'
-let g:ale_statusline_format = ['✗ %d', '⚡ %d', '✔ OK']
-let g:ale_echo_msg_format = '[%linter%] %code: %%s'
-let g:ale_lint_on_text_changed = 'normal'
-let g:ale_lint_on_insert_leave = 1
-let g:ale_c_gcc_options = '-Wall -O2 -std=c99'
-let g:ale_cpp_gcc_options = '-Wall -O2 -std=c++14'
-let g:ale_c_cppcheck_options = ''
-let g:ale_cpp_cppcheck_options = ''
+nmap <Leader>cs :cs find s 
+nmap <Leader>cg :cs find g 
+nmap <Leader>cc :cs find c 
+nmap <Leader>ct :cs find t 
+nmap <Leader>ce :cs find e 
+nmap <Leader>cf :cs find f 
+nmap <Leader>ci :cs find i 
+nmap <Leader>cd :cs find d 
