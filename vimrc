@@ -119,6 +119,9 @@ let mapleader=";"
 highlight OverLength ctermbg=darkyellow ctermfg=white
 match OverLength /\%81v.\+/
 
+"" block search
+vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" Programe language settings
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
