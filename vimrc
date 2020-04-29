@@ -97,6 +97,7 @@ Plug 'https://github.com/majutsushi/tagbar' " Tag
 Plug 'tpope/vim-fugitive' " Git tools
 """"Plug 'frazrepo/vim-rainbow' " gives every pair of brackets a unique color
 Plug 'mileszs/ack.vim' " File search
+Plug 'lfv89/vim-interestingwords' " high light key word (<lead>k)
 
 call plug#end()
 
@@ -119,7 +120,7 @@ let mapleader=";"
 highlight OverLength ctermbg=darkyellow ctermfg=white
 match OverLength /\%81v.\+/
 
-"" block search
+"" Search block
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
