@@ -137,6 +137,12 @@ vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
 let g:rainbow_active = 1
 
 ""
+" LeaderF
+let g:Lf_WindowPosition = 'popup'
+let g:Lf_PreviewInPopup = 1
+let g:Lf_UseCache = 0
+
+""
 " vim-which-key - Start
 let g:which_key_map =  {}
 call which_key#register(mapleader, "g:which_key_map")
