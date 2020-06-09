@@ -190,6 +190,10 @@ nnoremap <leader>be :BufExplorer<CR>
 nnoremap <leader>bt :ToggleBufExplorer<CR>
 nnoremap <leader>bs :BufExplorerHorizontalSplit<CR>
 nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
+""
+" match 80 column highlight
+nnoremap <leader>bm :match OverLength /\%81v.\+/<CR>
+nnoremap <leader>bu :match OverLength<CR>
 
 
 """""""""""""""""""""""""""""""""""""""
