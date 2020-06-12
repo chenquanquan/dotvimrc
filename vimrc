@@ -106,8 +106,14 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set number
 set wildmenu
+
+""
+" theme
 hi CursorLine   cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
 hi CursorColumn cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+"highlight Pmenu ctermbg=gray guibg=gray
+hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
+hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
 
 autocmd! bufwritepost .vimrc source $HOME/.vimrc
 
@@ -193,6 +199,13 @@ nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
 ""
 " match 80 column highlight
 nnoremap <leader>bm :match OverLength /\%81v.\+/<CR>
+nnoremap <leader>bu :match OverLength<CR>
+""
+" match 
+"
+nnoremap <leader>bl :set list<CR>
+nnoremap <leader>bn :set nolist<CR>
+nnoremap <leader>bu :match OverLength<CR>
 nnoremap <leader>bu :match OverLength<CR>
 
 
