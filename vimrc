@@ -37,6 +37,7 @@ set cursorline             " Find the current line quickly.
 set nowrapscan               " searches no wrap around end-of-file.
 set report      =0         " Always report changed lines.
 set synmaxcol   =200       " Only highlight the first 200 columns.
+set scrolloff =3
 
 set list                   " Show non-printable characters.
 if has('multi_byte') && &encoding ==# 'utf-8'
@@ -87,6 +88,10 @@ Plug 'mhinz/vim-grepper', { 'on': ['Grepper', '<plug>(GrepperOperator)'] }
 Plug 'airblade/vim-gitgutter'
 Plug 'kshenoy/vim-signature'
 
+"vim mark
+Plug 'inkarkat/vim-ingo-library'
+Plug 'inkarkat/vim-mark'
+
 Plug 'Yggdroot/LeaderF', { 'do': './install.sh' } " File & buffer search
 Plug 'https://github.com/easymotion/vim-easymotion' " Jump in window
 Plug 'itchyny/lightline.vim' " Status line
@@ -98,6 +103,7 @@ Plug 'tpope/vim-fugitive' " Git tools
 """"Plug 'frazrepo/vim-rainbow' " gives every pair of brackets a unique color
 Plug 'mileszs/ack.vim' " File search
 Plug 'lfv89/vim-interestingwords' " high light key word (<lead>k)
+Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
@@ -109,8 +115,15 @@ set wildmenu
 
 ""
 " theme
-hi CursorLine   cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
-hi CursorColumn cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+set background=dark
+augroup CursorLine
+  au!
+  au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
+  au WinLeave * setlocal nocursorline
+augroup END
+""""hi CursorLine   cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+""""hi CursorColumn cterm=NONE ctermbg=60 ctermfg=white guibg=darkred guifg=white
+
 "highlight Pmenu ctermbg=gray guibg=gray
 hi Pmenu ctermfg=NONE ctermbg=236 cterm=NONE guifg=NONE guibg=#64666d gui=NONE
 hi PmenuSel ctermfg=NONE ctermbg=24 cterm=NONE guifg=NONE guibg=#204a87 gui=NONE
@@ -125,6 +138,11 @@ let mapleader=";"
 "" Local stype
 highlight OverLength ctermbg=darkyellow ctermfg=white
 match OverLength /\%81v.\+/
+""""highlight OverLength ctermbg=darkred ctermfg=white guibg=#FFD9D9
+""""augroup vimrc_autocmds
+""""    autocmd!
+""""    autocmd BufEnter,WinEnter * call matchadd('OverLength', '\%>80v.\+', -1)
+""""augroup END
 
 "" Search block
 vnoremap // y/\V<C-R>=escape(@",'/\')<CR><CR>
@@ -200,6 +218,7 @@ nnoremap <leader>bv :BufExplorerVerticalSplit<CR>
 " match 80 column highlight
 nnoremap <leader>bm :match OverLength /\%81v.\+/<CR>
 nnoremap <leader>bu :match OverLength<CR>
+
 ""
 " match 
 "
@@ -370,3 +389,10 @@ nmap <Leader>ce :cs find e
 nmap <Leader>cf :cs find f 
 nmap <Leader>ci :cs find i 
 nmap <Leader>cd :cs find d 
+
+
+"""""""""""""""""""""""""""""""""""""""
+"" Mark
+"""""""""""""""""""""""""""""""""""""""
+nmap <Leader>M <Plug>MarkToggle
+nmap <Leader>N <Plug>MarkAllClear
