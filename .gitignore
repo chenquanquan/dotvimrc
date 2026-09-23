@@ -1,0 +1,9 @@
+# vim-plug and installed plugins (restored by :PlugInstall)
+plugged/
+autoload/
+
+# backup / swap / undo / viminfo files
+files/
+
+# netrw history
+.netrwhist
